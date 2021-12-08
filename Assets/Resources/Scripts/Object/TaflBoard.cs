@@ -11,19 +11,20 @@ public class TaflBoard : MonoBehaviour
     public GameObject whiteWarriorPrefab;
     public GameObject whiteKingPrefab;
 
-    private GameObject[,] Cells;
+    public GameObject[,] Cells;
 
 
     void Awake(){
         Cells = new GameObject[Size,Size];
         Destroy(gameObject.GetComponent<MeshRenderer>()); //The flagpole's just for our reference, so we destroy it here.
+        GenerateTaflBoard(Size);
+
     }
 
 
     // Start is called before the first frame update
     void Start()
     {
-        GenerateTaflBoard(Size);
     }
 
     // Update is called once per frame
@@ -32,17 +33,19 @@ public class TaflBoard : MonoBehaviour
         
     }
 
-
-    GameObject GetCell(int boardX, int boardZ){
-        return Cells[boardZ,boardX];
+    public Vector3 GetWorldCoordinates(int boardX, int boardZ){
+        return transform.position + GetLocalCoordinates(boardX, boardZ);
     }
 
-    public Vector3 GetWorldCoordinates(int boardX, int boardZ){
-        
-        float poseX = (boardX * taflCellPrefab.transform.localScale.x) + (taflCellPrefab.transform.localScale.x / 2);
-        float poseZ = (boardZ * taflCellPrefab.transform.localScale.z) + (taflCellPrefab.transform.localScale.z / 2);
+    public Vector3 GetLocalCoordinates(int boardX, int boardZ){
+        float poseX = (boardX * taflCellPrefab.transform.localScale.x);// + (taflCellPrefab.transform.localScale.x / 2);
+        float poseZ = (boardZ * taflCellPrefab.transform.localScale.z);// + (taflCellPrefab.transform.localScale.z / 2);
 
-        return transform.position + new Vector3(poseX, 0.0f, poseZ);
+        return new Vector3(poseX, 0.0f, poseZ);
+    }
+
+    public GameObject GetTaflCellAt(int boardX, int boardZ){
+        return Cells[boardZ, boardX];
     }
 
     public void GenerateTaflBoard(int size){

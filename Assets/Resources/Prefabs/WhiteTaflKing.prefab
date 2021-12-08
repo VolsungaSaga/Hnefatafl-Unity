@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5942883839034961680}
   - component: {fileID: 5917458078510861290}
   - component: {fileID: 5925377051483438314}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Stone_King_Element_7
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -92,7 +92,7 @@ GameObject:
   - component: {fileID: 5942817571814735116}
   - component: {fileID: 5913689932217281612}
   - component: {fileID: 5925505461215481812}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Stone_King_Element_8
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -173,7 +173,7 @@ GameObject:
   - component: {fileID: 5942922910928912138}
   - component: {fileID: 5917299877581790400}
   - component: {fileID: 5926104145198382938}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Stone_King_Element_6
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -254,7 +254,7 @@ GameObject:
   - component: {fileID: 5937486887021845878}
   - component: {fileID: 5913657267350764148}
   - component: {fileID: 5925975740895756182}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Stone_King_Element_5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -335,7 +335,7 @@ GameObject:
   - component: {fileID: 5937672193600539398}
   - component: {fileID: 5917456848508388654}
   - component: {fileID: 5924536846259971592}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Stone_King_Element_9
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -415,7 +415,8 @@ GameObject:
   m_Component:
   - component: {fileID: 5942991621640743852}
   - component: {fileID: 4049627962633745472}
-  m_Layer: 0
+  - component: {fileID: 32968175577295085}
+  m_Layer: 6
   m_Name: WhiteTaflKing
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -430,7 +431,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5939559042602459928}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 5.162663}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.6, y: 0.6, z: 0.6}
   m_Children:
   - {fileID: 5937574725646586580}
@@ -460,6 +461,20 @@ MonoBehaviour:
   Type: King
   Team: 1
   Speed: 2
+--- !u!136 &32968175577295085
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5939559042602459928}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.70084023
+  m_Height: 3.5434468
+  m_Direction: 1
+  m_Center: {x: 0, y: 1.25, z: 0}
 --- !u!1 &5939581348172035296
 GameObject:
   m_ObjectHideFlags: 0
@@ -471,7 +486,7 @@ GameObject:
   - component: {fileID: 5937696116713990104}
   - component: {fileID: 5917437402110075048}
   - component: {fileID: 5925920977382515590}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Stone_King_Element_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -552,7 +567,7 @@ GameObject:
   - component: {fileID: 5942879943067843524}
   - component: {fileID: 5913629074122588654}
   - component: {fileID: 5925836089755386388}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Stone_King_Element_4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -633,7 +648,7 @@ GameObject:
   - component: {fileID: 5937574725646586580}
   - component: {fileID: 5917661325005009906}
   - component: {fileID: 5925410666039108176}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Stone_King_Element_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -714,7 +729,7 @@ GameObject:
   - component: {fileID: 5937723718761354998}
   - component: {fileID: 5917367138710245854}
   - component: {fileID: 5925092619411334198}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Stone_King_Element_3
   m_TagString: Untagged
   m_Icon: {fileID: 0}

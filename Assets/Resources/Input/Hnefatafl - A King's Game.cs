@@ -1,4 +1,4 @@
-// GENERATED AUTOMATICALLY FROM 'Assets/Hnefatafl - A King's Game.inputactions'
+// GENERATED AUTOMATICALLY FROM 'Assets/Resources/Input/Hnefatafl - A King's Game.inputactions'
 
 using System;
 using System.Collections;
@@ -62,7 +62,15 @@ public class @HnefataflAKingsGame : IInputActionCollection, IDisposable
                     ""name"": ""RotateExecute"",
                     ""type"": ""Value"",
                     ""id"": ""d38def60-893f-4a41-8407-ed6bccd5b093"",
-                    ""expectedControlType"": ""Axis"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""MouseMove"",
+                    ""type"": ""Value"",
+                    ""id"": ""c9eb4915-2fc9-4d46-96c2-ea212168e936"",
+                    ""expectedControlType"": ""Vector2"",
                     ""processors"": """",
                     ""interactions"": """"
                 }
@@ -301,8 +309,19 @@ public class @HnefataflAKingsGame : IInputActionCollection, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""59f190c7-eb2f-48cd-8af1-828a7a498a54"",
-                    ""path"": ""<Mouse>/position/x"",
+                    ""id"": ""0d7f3ef1-4ee3-469a-91f6-aebad9a20e74"",
+                    ""path"": ""<Mouse>/scroll/y"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""Zoom"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""5e0cae67-c1ce-4347-9605-dcff23599e42"",
+                    ""path"": ""<Mouse>/delta"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard&Mouse"",
@@ -312,12 +331,12 @@ public class @HnefataflAKingsGame : IInputActionCollection, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""0d7f3ef1-4ee3-469a-91f6-aebad9a20e74"",
-                    ""path"": ""<Mouse>/scroll/y"",
+                    ""id"": ""92245548-fd3f-42c4-988a-c570f5a5cd05"",
+                    ""path"": ""<Mouse>/position"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard&Mouse"",
-                    ""action"": ""Zoom"",
+                    ""action"": ""MouseMove"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -901,6 +920,7 @@ public class @HnefataflAKingsGame : IInputActionCollection, IDisposable
         m_Player_Zoom = m_Player.FindAction("Zoom", throwIfNotFound: true);
         m_Player_RotateToggle = m_Player.FindAction("RotateToggle", throwIfNotFound: true);
         m_Player_RotateExecute = m_Player.FindAction("RotateExecute", throwIfNotFound: true);
+        m_Player_MouseMove = m_Player.FindAction("MouseMove", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -968,6 +988,7 @@ public class @HnefataflAKingsGame : IInputActionCollection, IDisposable
     private readonly InputAction m_Player_Zoom;
     private readonly InputAction m_Player_RotateToggle;
     private readonly InputAction m_Player_RotateExecute;
+    private readonly InputAction m_Player_MouseMove;
     public struct PlayerActions
     {
         private @HnefataflAKingsGame m_Wrapper;
@@ -978,6 +999,7 @@ public class @HnefataflAKingsGame : IInputActionCollection, IDisposable
         public InputAction @Zoom => m_Wrapper.m_Player_Zoom;
         public InputAction @RotateToggle => m_Wrapper.m_Player_RotateToggle;
         public InputAction @RotateExecute => m_Wrapper.m_Player_RotateExecute;
+        public InputAction @MouseMove => m_Wrapper.m_Player_MouseMove;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1005,6 +1027,9 @@ public class @HnefataflAKingsGame : IInputActionCollection, IDisposable
                 @RotateExecute.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnRotateExecute;
                 @RotateExecute.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnRotateExecute;
                 @RotateExecute.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnRotateExecute;
+                @MouseMove.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMouseMove;
+                @MouseMove.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMouseMove;
+                @MouseMove.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMouseMove;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -1027,6 +1052,9 @@ public class @HnefataflAKingsGame : IInputActionCollection, IDisposable
                 @RotateExecute.started += instance.OnRotateExecute;
                 @RotateExecute.performed += instance.OnRotateExecute;
                 @RotateExecute.canceled += instance.OnRotateExecute;
+                @MouseMove.started += instance.OnMouseMove;
+                @MouseMove.performed += instance.OnMouseMove;
+                @MouseMove.canceled += instance.OnMouseMove;
             }
         }
     }
@@ -1189,6 +1217,7 @@ public class @HnefataflAKingsGame : IInputActionCollection, IDisposable
         void OnZoom(InputAction.CallbackContext context);
         void OnRotateToggle(InputAction.CallbackContext context);
         void OnRotateExecute(InputAction.CallbackContext context);
+        void OnMouseMove(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {

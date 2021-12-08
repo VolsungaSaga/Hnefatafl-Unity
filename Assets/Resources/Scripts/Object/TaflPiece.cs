@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class TaflPiece : MonoBehaviour
 {
-    private int BoardX, BoardY;
+    int BoardX, BoardY;
     
     //Warrior or King?
     public string Type;
@@ -14,13 +14,14 @@ public class TaflPiece : MonoBehaviour
 
 
     public float Speed;
-    private bool isMoving = false;
-    private bool isSelected = false;
+    bool isMoving {get; set;} = false;
+    public bool isSelected {get; set;} = false;
 
     public void initTaflPiece(int boardX, int boardY){
         BoardX = boardX;
         BoardY = boardY;
     }
+
 
     // Start is called before the first frame update
     void Start()
@@ -34,7 +35,21 @@ public class TaflPiece : MonoBehaviour
     }
 
 
-    //This function will translate the piece towards a specific location.
+
+    //Changes the piece's color.
+    public void ChangeColor(Color color){
+        var material = gameObject.GetComponentInChildren<Renderer>().material;
+        material.color = color;
+    }
+
+    public void ResetColor(){
+        var material = gameObject.GetComponentInChildren<Renderer>().material;
+        material.color = Color.white;
+    }
+
+
+
+    //This function will translate the piece towards a specific location over time by using a coroutine.
     public void MoveTo(Vector3 loc){
         StartCoroutine("c_MoveTo", loc);
     }

@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6592571630600330657}
   - component: {fileID: 6558825737387001873}
   - component: {fileID: 6567358653118163493}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Stone_King_Element_4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -92,7 +92,7 @@ GameObject:
   - component: {fileID: 6585156058304024401}
   - component: {fileID: 6559471390214969851}
   - component: {fileID: 6568085325347683465}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Stone_King_Element_6
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -173,7 +173,7 @@ GameObject:
   - component: {fileID: 6592689925194592149}
   - component: {fileID: 6560332999213861613}
   - component: {fileID: 6567254964733972921}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Stone_King_Element_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -254,7 +254,7 @@ GameObject:
   - component: {fileID: 6592605696216501503}
   - component: {fileID: 6558863338951911535}
   - component: {fileID: 6567956897673609283}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Stone_King_Element_3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -335,7 +335,7 @@ GameObject:
   - component: {fileID: 6585174079629776509}
   - component: {fileID: 6558387697301406187}
   - component: {fileID: 6566680328339043455}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Stone_King_Element_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -416,7 +416,7 @@ GameObject:
   - component: {fileID: 6584842377467570425}
   - component: {fileID: 6558844844779611545}
   - component: {fileID: 6566647971477128605}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Stone_King_Element_7
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -497,7 +497,7 @@ GameObject:
   - component: {fileID: 6592190912372287337}
   - component: {fileID: 6558844262368127419}
   - component: {fileID: 6566690204846211845}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Stone_King_Element_9
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -577,7 +577,8 @@ GameObject:
   m_Component:
   - component: {fileID: 6592609502919239823}
   - component: {fileID: 9019461692562078533}
-  m_Layer: 0
+  - component: {fileID: -3747975989777076071}
+  m_Layer: 6
   m_Name: BlackTaflKing
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -592,7 +593,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6590805989650215351}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 12.54, y: 1.674, z: 11.05}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.6, y: 0.6, z: 0.6}
   m_Children:
   - {fileID: 6585174079629776509}
@@ -622,6 +623,20 @@ MonoBehaviour:
   Type: King
   Team: 2
   Speed: 2
+--- !u!136 &-3747975989777076071
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6590805989650215351}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.70084023
+  m_Height: 3.5434468
+  m_Direction: 1
+  m_Center: {x: 0, y: 1.25, z: 0}
 --- !u!1 &6590897813251587943
 GameObject:
   m_ObjectHideFlags: 0
@@ -633,7 +648,7 @@ GameObject:
   - component: {fileID: 6584876966941735653}
   - component: {fileID: 6560294311316172973}
   - component: {fileID: 6567984106992647661}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Stone_King_Element_5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -714,7 +729,7 @@ GameObject:
   - component: {fileID: 6585091841869870207}
   - component: {fileID: 6558863295377656061}
   - component: {fileID: 6568020465163377609}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Stone_King_Element_8
   m_TagString: Untagged
   m_Icon: {fileID: 0}
