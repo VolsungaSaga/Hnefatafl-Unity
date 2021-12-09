@@ -35,11 +35,11 @@ public class CameraRotate : MonoBehaviour
 
             if(!board){return;}
 
-            int centerIndex = Mathf.FloorToInt(board.GetComponent<TaflBoard>().Size / 2);
+            int centerIndex = Mathf.FloorToInt(board.GetComponent<GameBoard>().Size / 2);
 
 
             //Get center cell of the board, set our axis.
-            GameObject cell = board.GetComponent<TaflBoard>().GetTaflCellAt(centerIndex, centerIndex);
+            GameObject cell = board.GetComponent<GameBoard>().GetTaflCellAt(centerIndex, centerIndex);
 
             HorizontalPointOfRotation = cell.transform;
             VerticalPointOfRotation = cell.transform;

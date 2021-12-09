@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TaflBoard : MonoBehaviour
+public class GameBoard : MonoBehaviour
 {
     public int Size = 7;
     public GameObject taflCellPrefab;
@@ -16,7 +16,6 @@ public class TaflBoard : MonoBehaviour
 
     void Awake(){
         Cells = new GameObject[Size,Size];
-        Destroy(gameObject.GetComponent<MeshRenderer>()); //The flagpole's just for our reference, so we destroy it here.
         GenerateTaflBoard(Size);
 
     }
@@ -33,8 +32,14 @@ public class TaflBoard : MonoBehaviour
         
     }
 
+    void OnDrawGizmos(){
+        Gizmos.color = Color.white;
+        Gizmos.DrawCube(transform.position, Vector3.one);
+    }
+
     public Vector3 GetWorldCoordinates(int boardX, int boardZ){
-        return transform.position + GetLocalCoordinates(boardX, boardZ);
+        return Cells[boardZ, boardX].transform.position;
+        //return transform.position + GetLocalCoordinates(boardX, boardZ);
     }
 
     public Vector3 GetLocalCoordinates(int boardX, int boardZ){
@@ -64,7 +69,7 @@ public class TaflBoard : MonoBehaviour
                 //A board cell is a child of the board object itself.
                 var taflCell = Instantiate(taflCellPrefab, new Vector3(xPos, yPos, zPos ), Quaternion.identity);
                 taflCell.transform.parent = gameObject.transform;
-
+                taflCell.GetComponent<GameBoardCell>().init(x, z);
                 Cells[z,x] = taflCell;
             }
 
@@ -134,7 +139,31 @@ public class TaflBoard : MonoBehaviour
         var taflPiece = Instantiate(piecePrefab, cell.transform.position, Quaternion.identity); //Create the piece
 
         taflPiece.transform.parent = cell.transform; //Set transform parent.
-        taflPiece.GetComponent<TaflPiece>().initTaflPiece(boardX, boardZ); //Initialize data that the tafl piece needs to know.
+        taflPiece.GetComponent<GamePiece>().init(boardX, boardZ); //Initialize data that the tafl piece needs to know.
+    }
+
+
+    /*
+        Given a reference to a game piece and the game board cell, translate the game piece to the corresponding position in the world frame.
+        This function handles both starting the animation for the game piece and ensuring that all the data's properly updated for the cell, the board, and the game piece.
+    */
+    public void MoveGamePieceToCell(GameObject gamePiece, GameObject targetBoardCell){
+        int cellBoardX = targetBoardCell.GetComponent<GameBoardCell>().BoardX;
+        int cellBoardZ = targetBoardCell.GetComponent<GameBoardCell>().BoardZ;
+
+        //First, decouple the game piece from its existing parent, if any.
+        gamePiece.transform.parent = null;
+
+        //Set the game piece's relevant data to appropriate values for its new position.
+        gamePiece.GetComponent<GamePiece>().BoardX = cellBoardX;
+        gamePiece.GetComponent<GamePiece>().BoardZ = cellBoardZ;
+
+        //Begin the animation for the game piece!
+        Vector3 targetPose = GetWorldCoordinates(cellBoardX, cellBoardZ);
+        gamePiece.GetComponent<GamePiece>().MoveTo(targetPose);
+
+        //Set the new parent.
+        gamePiece.transform.parent = targetBoardCell.transform;
     }
 
 

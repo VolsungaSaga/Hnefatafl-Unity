@@ -2,9 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TaflPiece : MonoBehaviour
+public class GamePiece : MonoBehaviour
 {
-    int BoardX, BoardY;
+    public int BoardX, BoardZ;
     
     //Warrior or King?
     public string Type;
@@ -14,12 +14,12 @@ public class TaflPiece : MonoBehaviour
 
 
     public float Speed;
-    bool isMoving {get; set;} = false;
+    public bool isMoving {get; set;} = false;
     public bool isSelected {get; set;} = false;
 
-    public void initTaflPiece(int boardX, int boardY){
+    public void init(int boardX, int boardZ){
         BoardX = boardX;
-        BoardY = boardY;
+        BoardZ = boardZ;
     }
 
 
@@ -51,15 +51,20 @@ public class TaflPiece : MonoBehaviour
 
     //This function will translate the piece towards a specific location over time by using a coroutine.
     public void MoveTo(Vector3 loc){
-        StartCoroutine("c_MoveTo", loc);
+        IEnumerator moveTo = c_MoveTo(loc);
+        StartCoroutine(moveTo);
     }
 
-    IEnumerator c_MoveTo(Vector3 loc){
-        while(Vector3.Distance(loc, transform.position) < 0.001){
+    private IEnumerator c_MoveTo(Vector3 loc){
+        while(Vector3.Distance(loc, transform.position) > 0.001){
+            Debug.Log($"{gameObject.ToString()}'s position is {transform.position.ToString()}");
             Vector3 newPosition = Vector3.MoveTowards(gameObject.transform.position, loc, Speed * Time.deltaTime);
             gameObject.transform.position = newPosition;
 
             yield return null;
         }
+
+        gameObject.transform.position = loc; //Finish it up.
+
     }
 }

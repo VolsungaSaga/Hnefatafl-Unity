@@ -486,6 +486,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc03e5cdc10357840a3a0f9416f26f34, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameBoard: {fileID: 967750725}
 --- !u!114 &963194231
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -532,6 +533,11 @@ LookAtConstraint:
   m_IsContraintActive: 0
   m_IsLocked: 0
   m_Sources: []
+--- !u!1 &967750725 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8292644331806446329, guid: a6af8ac917d719c40a78116887bb29d5, type: 3}
+  m_PrefabInstance: {fileID: 8292644332295918597}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &2107378837 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8292644331806446328, guid: a6af8ac917d719c40a78116887bb29d5, type: 3}
