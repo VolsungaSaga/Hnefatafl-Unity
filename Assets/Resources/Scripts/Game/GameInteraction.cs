@@ -10,11 +10,19 @@ public class GameInteraction : MonoBehaviour
 
 
     public GameObject gameBoard;
+    public GameManager gameManager;
+
+    private int _layerCells;
+    private int _layerPieces;
 
     Vector2 mousePosition;
 
 
 
+    void Awake(){
+        _layerCells = LayerMask.NameToLayer("GameBoardCells");
+        _layerPieces = LayerMask.NameToLayer("GamePieces");
+    }
 
 
     // Start is called before the first frame update
@@ -44,11 +52,12 @@ public class GameInteraction : MonoBehaviour
 
             //Mask depending on whether we already selected a piece and are now selecting an empty cell, or 
             // we're selecting a piece.
-            if(selectedPiece == null){
-                int layerMask = 1 << LayerMask.NameToLayer("GamePieces");
-                bool hit = Physics.Raycast(selectRay, out hitInfo, 200, layerMask);
 
-                if(hit){
+            if(selectedPiece == null){
+                int layerMask = 1 << _layerPieces;
+                bool hit = Physics.Raycast(selectRay, out hitInfo, 200, layerMask);
+                GameObject hitObject = hitInfo.collider.gameObject;
+                if(hit && Ruleset.CheckIfTeamMatch(gameManager.getCurrentPlayerTurn(), hitObject)){
 
                     SelectGamePiece(hitInfo.collider.gameObject);
 
@@ -57,20 +66,31 @@ public class GameInteraction : MonoBehaviour
             }
 
             else{
-                Debug.Log($"Selected Piece is : {selectedPiece.ToString()}");
-                int layerMask = (1 << LayerMask.NameToLayer("GamePieces")) | (1 << LayerMask.NameToLayer("GameBoardCells"));
+                //Debug.Log($"Selected Piece is : {selectedPiece.ToString()}");
+                int layerMask = (1 << _layerPieces) | (1 << _layerCells);
                 bool hit = Physics.Raycast(selectRay, out hitInfo, 200, layerMask);
 
                 if(hit){
                     GameObject hitObject = hitInfo.collider.gameObject;
-                    Debug.Log($"The hit object is : {hitObject.ToString()}");
-                    if(hitObject.layer == LayerMask.NameToLayer("GamePieces")){
+                    //Debug.Log($"The hit object is : {hitObject.ToString()}");
+                    //Selected another piece!
+                    if(hitObject.layer == _layerPieces && Ruleset.CheckIfTeamMatch(gameManager.getCurrentPlayerTurn(), hitObject)){
                         //If we clicked another piece while having a piece selected, deselect the previous piece and select this one.
                         ClearSelection();
                         SelectGamePiece(hitObject);
                     }
-                    else if(hitObject.layer == LayerMask.NameToLayer("GameBoardCells")){
-                        //If we click on a cell, move the piece to it. Checking for emptiness comes later!
+                    //Selected a cell!
+                    else if(hitObject.layer == _layerCells){
+                        int cellX = hitObject.GetComponent<GameBoardCell>().BoardX;
+                        int cellZ = hitObject.GetComponent<GameBoardCell>().BoardZ;
+
+                        //If we clicked on a cell, then we're doing a move! We need to check if the move is legal, though.
+                        if(!Ruleset.CheckMoveLegality(selectedPiece, gameBoard, cellX, cellZ)){
+                            PlayerAttemptedIllegalMove(); //
+                            return;
+                        }
+
+
                         OrderSelectedGamePieceTo(hitObject, true);
                     }
 
@@ -81,6 +101,11 @@ public class GameInteraction : MonoBehaviour
 
         }
 
+    }
+
+    /*This function is meant to contain all the things that need to happen when a player tries to make an illegal move.*/
+    void PlayerAttemptedIllegalMove(){
+        return;
     }
 
 

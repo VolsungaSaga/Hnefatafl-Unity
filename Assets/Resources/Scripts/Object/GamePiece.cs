@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
+using TMPro;
 
 public class GamePiece : MonoBehaviour
 {
@@ -17,20 +19,47 @@ public class GamePiece : MonoBehaviour
     public bool isMoving {get; set;} = false;
     public bool isSelected {get; set;} = false;
 
+    private TMP_Text _debugText;
+
+    private GameBoard _myBoard;
+
+
+    public UnityEvent<GamePiece> e_MoveBegin;
+    public UnityEvent<GamePiece> e_MoveFinished;
+
     public void init(int boardX, int boardZ){
         BoardX = boardX;
         BoardZ = boardZ;
     }
 
+    void Awake(){
+        if(e_MoveFinished == null){
+            e_MoveFinished = new UnityEvent<GamePiece>();
+        }
+
+        if(e_MoveBegin == null){
+            e_MoveBegin = new UnityEvent<GamePiece>();
+        }
+    }
+
 
     // Start is called before the first frame update
     void Start()
-    {   
+    {
+        _myBoard = GameObject.Find("TaflBoard").GetComponent<GameBoard>();
+
+        _debugText = transform.Find("DebugText").gameObject.GetComponent<TMP_Text>();
+
+        
+
     }
 
     // Update is called once per frame
     void Update()
     {
+        // if(_debugText){
+        //     _debugText.text = $"{BoardX},{BoardZ}";
+        // }  
         
     }
 
@@ -56,15 +85,22 @@ public class GamePiece : MonoBehaviour
     }
 
     private IEnumerator c_MoveTo(Vector3 loc){
+        isMoving = true;
+        e_MoveBegin.Invoke(this);
         while(Vector3.Distance(loc, transform.position) > 0.001){
-            Debug.Log($"{gameObject.ToString()}'s position is {transform.position.ToString()}");
+            //Debug.Log($"{gameObject.ToString()}'s position is {transform.position.ToString()}");
             Vector3 newPosition = Vector3.MoveTowards(gameObject.transform.position, loc, Speed * Time.deltaTime);
             gameObject.transform.position = newPosition;
 
             yield return null;
         }
-
+        isMoving = false;
         gameObject.transform.position = loc; //Finish it up.
+        e_MoveFinished.Invoke(this);
 
     }
+
+
+
+
 }
