@@ -6,6 +6,7 @@ using UnityEngine;
 public static class Ruleset
 {
 
+
     public static bool CheckIfTeamMatch(int team, GameObject piece){
         return team == piece.GetComponent<GamePiece>().Team;
 
@@ -88,8 +89,8 @@ public static class Ruleset
             GameObject neighborObj = boardData.GetNeighbor((GameBoard.Direction)i, piece, out edgeOrigin);
 
 
-            //If there's a neighbor, check one more cell in the same direction.
-            if(neighborObj){
+            //If there's a neighbor, check one more cell in the same direction. We don't consider the King for captures (but we do for victory!)
+            if(neighborObj && !neighborObj.GetComponent<GamePiece>().isKing()){
                 //The neighbor's attributes
                 int neighborTeam = neighborObj.GetComponent<GamePiece>().Team;
                 string neighborType = neighborObj.GetComponent<GamePiece>().Type;
@@ -117,13 +118,55 @@ public static class Ruleset
         return capturedPieces.Count > 0;
     }
 
+    // Is this location on a corner?
+    public static bool IsCorner(GameBoard board, int boardX, int boardZ){
+        return (boardX == 0 || boardX == board.Size - 1) && (boardZ == 0 || boardZ == board.Size - 1);
+    }
 
+    //Given a piece and its board, determine if there are any empty spots
+    // in an orthogonal direction. If there are, the piece is not surrounded. If you couldn't 
+    // find any, then it is surrounded. 
+    public static bool IsSurroundedByEnemies(GamePiece piece, GameBoard board){
+        bool currentEdgeCheck;
+        foreach(int dir in Enum.GetValues(typeof(GameBoard.Direction))){
+            GameObject neighbor = board.GetNeighbor((GameBoard.Direction) dir, piece.gameObject, out currentEdgeCheck);
+            //If there is no neighbor, and current edge check is false, then we must not be surrounded!
+            if((!neighbor && currentEdgeCheck == false)){
+                return false;
+            }
+            //Also check if the neighbor is on your team. If any neighbor's on your own team, you're not surrounded.
+            else if(neighbor && neighbor.GetComponent<GamePiece>().Team == piece.Team){
+                return false;
+            }
+        }
+        //If all orthogonal directions were occupied, then we are indeed surrounded.
+        return true;
 
-    public static int CheckForVictoryState(GameObject board){
+    }
+
+    /*
+    Returns either the team that is victorious or -1 if no team has won yet.
+    */
+    public static int CheckForVictoryState(GameObject board, GameManager manager){
         GameBoard boardData = board.GetComponent<GameBoard>();
+        int kingX = boardData.whiteKing.GetComponent<GamePiece>().BoardX;
+        int kingZ = boardData.whiteKing.GetComponent<GamePiece>().BoardZ;
+        
+
+        //White team, the one with a king.
+        //Check if he's in a corner spot. If so, white has the victory!
+        if (IsCorner(board.GetComponent<GameBoard>(), kingX, kingZ)){
+            return 1; //White
+        }
+
+        //Red team, which must surround the king to win.
+        if (IsSurroundedByEnemies(boardData.whiteKing.GetComponent<GamePiece>(), boardData)){
+            return 2; //Red
+        }
+        
 
 
-        return 1;
+        return -1;
     }
 
 }

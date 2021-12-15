@@ -9,11 +9,20 @@ public class GameManager : MonoBehaviour
     //Game State Variables
     private int  _playerTurn;
 
+    private List<GameObject> _capturedPieces;
+
+    public Dictionary<int, string> Teams {get; private set;}
+
+    public UnityEvent<int> e_victory;
 
 
 
     void Awake(){
         _playerTurn = 1;
+        _capturedPieces = new List<GameObject>();
+        Teams = new Dictionary<int, string>();
+        Teams.Add(1, "White");
+        Teams.Add(2, "Red");
     }
 
     // Start is called before the first frame update
@@ -21,6 +30,8 @@ public class GameManager : MonoBehaviour
     {
         _board.e_boardMoveBegin.AddListener(onPieceMoveBegin);
         _board.e_boardMoveFinished.AddListener(onPieceMoveFinish);
+
+        e_victory.AddListener(onVictory);
 
 
     }
@@ -67,11 +78,26 @@ public class GameManager : MonoBehaviour
 
 
     void onPlayerTurnFinish(){
-        Debug.Log("Turn completed event invoked!");
+        //Debug.Log("Turn completed event invoked!");
 
         cyclePlayerTurn();
 
-        Debug.Log($"Now it's player {getCurrentPlayerTurn()}'s turn ");
+        //Check for a victory state.
+        int victoriousTeam = Ruleset.CheckForVictoryState(_board.gameObject, this);
+
+        if(victoriousTeam > 0){
+            Debug.Log($"The winner is {Teams[victoriousTeam]}");
+        }
+
+        else{
+            Debug.Log("Nobody has won yet.");
+        }
+
+        //Debug.Log($"Now it's player {getCurrentPlayerTurn()}'s turn ");
+    }
+
+    void onVictory(int winningTeam){
+
     }
 
 }

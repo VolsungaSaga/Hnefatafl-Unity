@@ -76,6 +76,9 @@ public class GamePiece : MonoBehaviour
         material.color = Color.white;
     }
 
+    public bool isKing(){
+        return Type == "King";
+    }
 
 
     //This function will translate the piece towards a specific location over time by using a coroutine.

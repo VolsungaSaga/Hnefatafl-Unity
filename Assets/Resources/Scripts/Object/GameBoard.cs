@@ -13,6 +13,9 @@ public class GameBoard : MonoBehaviour
 
     private GameObject[,] Cells;
 
+    //A reference to the king piece.
+    public GameObject whiteKing {get; private set;}
+
     public GameManager manager;
 
 
@@ -87,6 +90,8 @@ public class GameBoard : MonoBehaviour
         return new Vector3(poseX, 0.0f, poseZ);
     }
 
+
+
     public GameObject GetTaflCellAt(int boardX, int boardZ){
         if(boardX < 0 || boardZ < 0 || boardX > Size - 1 || boardZ > Size - 1){
             return null;
@@ -141,7 +146,7 @@ public class GameBoard : MonoBehaviour
                 float zPos = z + (zLength / 2);
                 //A board cell is a child of the board object itself.
                 var taflCell = Instantiate(taflCellPrefab, new Vector3(xPos, yPos, zPos ), Quaternion.identity);
-                taflCell.transform.parent = gameObject.transform;
+                taflCell.transform.SetParent(gameObject.transform, true);
                 taflCell.GetComponent<GameBoardCell>().init(x, z);
                 Cells[x,z] = taflCell;
             }
@@ -259,6 +264,11 @@ public class GameBoard : MonoBehaviour
         taflPiece.transform.parent = cell.transform; //Set transform parent.
         taflPiece.GetComponent<GamePiece>().init(boardX, boardZ); //Initialize data that the tafl piece needs to know.
         cell.GetComponent<GameBoardCell>().Occupant = taflPiece;
+
+        //If we create the white king piece, we'll want to store it in a cache variable for access later.
+        if (piecePrefab == whiteKingPrefab){
+            whiteKing = taflPiece;
+        }
     }
 
 
