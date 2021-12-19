@@ -23,7 +23,7 @@ public class DisplayTurn : MonoBehaviour
     {
         int currentTurn = gameManager.getCurrentPlayerTurn();
 
-        myText.text = $"Player {currentTurn}'s Turn";
+        myText.text = $"{gameManager.Teams[currentTurn]} Team's Turn";
 
         
     }

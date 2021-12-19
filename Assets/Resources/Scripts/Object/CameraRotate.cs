@@ -29,8 +29,7 @@ public class CameraRotate : MonoBehaviour
     {
 
         if(autoSetAxis){
-            //We want to lock onto the center of the board, but we don't necessarily have the cells initialized yet.
-            // So, we calculate where the center's going to be by using the Size variable, which we know exists already.
+            //We want to lock onto the center of the board.
             GameObject board = GameObject.Find("TaflBoard");
 
             if(!board){return;}

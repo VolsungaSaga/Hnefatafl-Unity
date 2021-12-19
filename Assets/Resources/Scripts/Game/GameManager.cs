@@ -86,7 +86,7 @@ public class GameManager : MonoBehaviour
         int victoriousTeam = Ruleset.CheckForVictoryState(_board.gameObject, this);
 
         if(victoriousTeam > 0){
-            Debug.Log($"The winner is {Teams[victoriousTeam]}");
+            e_victory.Invoke(victoriousTeam);
         }
 
         else{
@@ -97,7 +97,7 @@ public class GameManager : MonoBehaviour
     }
 
     void onVictory(int winningTeam){
-
+        Debug.Log($"The {Teams[winningTeam]} has won!");
     }
 
 }

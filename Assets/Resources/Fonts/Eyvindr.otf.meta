@@ -1,0 +1,23 @@
+fileFormatVersion: 2
+guid: b884ddc8f8af5b7499693d8f718cf342
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontNames:
+  - Eyvindr
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: b4054aa7cfa68dd4896c982b8de3747f, type: 3}
+  - {fileID: 12800000, guid: 246c73f00f9b11a49ab244a83b7e269c, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  shouldRoundAdvanceValue: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
