@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Events;
+using TMPro;
 
 public class Menu : MonoBehaviour
 {
@@ -61,6 +62,7 @@ public class Menu : MonoBehaviour
     private void SetAlphaAllChildren(float alpha){
         Image[] childrenImages = gameObject.GetComponentsInChildren<Image>(false);
         Text[] childrenText = gameObject.GetComponentsInChildren<Text>(false);
+        TextMeshProUGUI[] childrenTextMeshes = gameObject.GetComponentsInChildren<TextMeshProUGUI>(false);
 
         foreach (Image childImage in childrenImages){
             Color currColor = childImage.color;
@@ -72,6 +74,12 @@ public class Menu : MonoBehaviour
             Color currColor = childText.color;
             currColor.a = alpha;
             childText.color = currColor;
+        }
+
+        foreach(TextMeshProUGUI childTextMesh in childrenTextMeshes){
+            Color currColor = childTextMesh.color;
+            currColor.a = alpha;
+            childTextMesh.color = currColor;
         }
     }
 
@@ -91,6 +99,7 @@ public class Menu : MonoBehaviour
         //First, we get all the image and text components of the game object.
         Image[] childrenImages = gameObject.GetComponentsInChildren<Image>(false);
         Text[] childrenText = gameObject.GetComponentsInChildren<Text>(false);
+        TextMeshProUGUI[] childrenTextMeshes = gameObject.GetComponentsInChildren<TextMeshProUGUI>(false);
 
         float currentTimeFromStart = 0.0f;
         float targetAlpha = 1.0f;
@@ -110,6 +119,12 @@ public class Menu : MonoBehaviour
                 childText.color = currColor;
             }
 
+            foreach(TextMeshProUGUI childTextMesh in childrenTextMeshes){
+                Color currColor = childTextMesh.color;
+                currColor.a = Mathf.Lerp(originAlpha, targetAlpha, currentTimeFromStart / timeToFade);
+                childTextMesh.color = currColor;
+            }
+
             currentTimeFromStart += Time.deltaTime;
 
             yield return null;
@@ -129,6 +144,12 @@ public class Menu : MonoBehaviour
             childText.color = currColor;
         }
 
+        foreach(TextMeshProUGUI childTextMesh in childrenTextMeshes){
+            Color currColor = childTextMesh.color;
+            currColor.a = targetAlpha;
+            childTextMesh.color = currColor;
+        }
+
         //Invoke fade-in event
         e_onFadeIn.Invoke(gameObject);
 
@@ -142,6 +163,7 @@ public class Menu : MonoBehaviour
         //First, we get all the image and text components of the game object.
         Image[] childrenImages = gameObject.GetComponentsInChildren<Image>(false);
         Text[] childrenText = gameObject.GetComponentsInChildren<Text>(false);
+        TextMeshProUGUI[] childrenTextMeshes = gameObject.GetComponentsInChildren<TextMeshProUGUI>(false);
 
         float currentTimeFromStart = 0.0f;
         float targetAlpha = 0.0f;
@@ -161,6 +183,12 @@ public class Menu : MonoBehaviour
                 childText.color = currColor;
             }
 
+            foreach(TextMeshProUGUI childTextMesh in childrenTextMeshes){
+                Color currColor = childTextMesh.color;
+                currColor.a = Mathf.Lerp(originAlpha, targetAlpha, currentTimeFromStart / timeToFade);
+                childTextMesh.color = currColor;
+            }
+
             currentTimeFromStart += Time.deltaTime;
 
             yield return null;
@@ -178,6 +206,12 @@ public class Menu : MonoBehaviour
             Color currColor = childText.color;
             currColor.a = targetAlpha;
             childText.color = currColor;
+        }
+
+        foreach(TextMeshProUGUI childTextMesh in childrenTextMeshes){
+            Color currColor = childTextMesh.color;
+            currColor.a = targetAlpha;
+            childTextMesh.color = currColor;
         }
 
         //Invoke fade-out event

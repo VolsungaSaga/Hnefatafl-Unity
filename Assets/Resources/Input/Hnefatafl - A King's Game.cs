@@ -73,6 +73,14 @@ public class @HnefataflAKingsGame : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Vector2"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""Escape"",
+                    ""type"": ""Button"",
+                    ""id"": ""26744561-562f-44a8-bacf-55498cc67139"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -337,6 +345,17 @@ public class @HnefataflAKingsGame : IInputActionCollection, IDisposable
                     ""processors"": """",
                     ""groups"": ""Keyboard&Mouse"",
                     ""action"": ""MouseMove"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""ae82906c-f90c-4e90-b834-f15c61309672"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""Escape"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -921,6 +940,7 @@ public class @HnefataflAKingsGame : IInputActionCollection, IDisposable
         m_Player_RotateToggle = m_Player.FindAction("RotateToggle", throwIfNotFound: true);
         m_Player_RotateExecute = m_Player.FindAction("RotateExecute", throwIfNotFound: true);
         m_Player_MouseMove = m_Player.FindAction("MouseMove", throwIfNotFound: true);
+        m_Player_Escape = m_Player.FindAction("Escape", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -989,6 +1009,7 @@ public class @HnefataflAKingsGame : IInputActionCollection, IDisposable
     private readonly InputAction m_Player_RotateToggle;
     private readonly InputAction m_Player_RotateExecute;
     private readonly InputAction m_Player_MouseMove;
+    private readonly InputAction m_Player_Escape;
     public struct PlayerActions
     {
         private @HnefataflAKingsGame m_Wrapper;
@@ -1000,6 +1021,7 @@ public class @HnefataflAKingsGame : IInputActionCollection, IDisposable
         public InputAction @RotateToggle => m_Wrapper.m_Player_RotateToggle;
         public InputAction @RotateExecute => m_Wrapper.m_Player_RotateExecute;
         public InputAction @MouseMove => m_Wrapper.m_Player_MouseMove;
+        public InputAction @Escape => m_Wrapper.m_Player_Escape;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1030,6 +1052,9 @@ public class @HnefataflAKingsGame : IInputActionCollection, IDisposable
                 @MouseMove.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMouseMove;
                 @MouseMove.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMouseMove;
                 @MouseMove.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMouseMove;
+                @Escape.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnEscape;
+                @Escape.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnEscape;
+                @Escape.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnEscape;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -1055,6 +1080,9 @@ public class @HnefataflAKingsGame : IInputActionCollection, IDisposable
                 @MouseMove.started += instance.OnMouseMove;
                 @MouseMove.performed += instance.OnMouseMove;
                 @MouseMove.canceled += instance.OnMouseMove;
+                @Escape.started += instance.OnEscape;
+                @Escape.performed += instance.OnEscape;
+                @Escape.canceled += instance.OnEscape;
             }
         }
     }
@@ -1218,6 +1246,7 @@ public class @HnefataflAKingsGame : IInputActionCollection, IDisposable
         void OnRotateToggle(InputAction.CallbackContext context);
         void OnRotateExecute(InputAction.CallbackContext context);
         void OnMouseMove(InputAction.CallbackContext context);
+        void OnEscape(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {

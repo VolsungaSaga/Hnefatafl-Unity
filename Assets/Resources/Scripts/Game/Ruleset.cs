@@ -51,7 +51,7 @@ public static class Ruleset
 
         
 
-        //Third, check if the center is being targeted. You can't go to the center!
+        //Third, check if the center is being targeted. You can't occupy the center!
         if(pieceType != "King" && (targetBoardX == boardData.Size / 2) && (targetBoardZ == boardData.Size / 2)){
             return false;
         }

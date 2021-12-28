@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     public GameBoard _board;
@@ -97,7 +98,21 @@ public class GameManager : MonoBehaviour
     }
 
     void onVictory(int winningTeam){
-        Debug.Log($"The {Teams[winningTeam]} has won!");
+        Debug.Log($"The {Teams[winningTeam]} team has won!");
+
+        //Go to the appropriate victory scene depending on which team won.
+
+        if(Teams[winningTeam] == "White"){
+
+            SceneManager.LoadScene("WhiteVictory");
+
+        }
+
+        else if(Teams[winningTeam] == "Red"){
+            SceneManager.LoadScene("RedVictory");
+        }
+
+
     }
 
 }

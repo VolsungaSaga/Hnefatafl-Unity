@@ -8,7 +8,7 @@ public class MainMenuCallbacks : MonoBehaviour
 
     public MenuManager manager;
 
-
+    public SceneTransit transitionManager;
 
     // Start is called before the first frame update
     void Start()
@@ -26,7 +26,8 @@ public class MainMenuCallbacks : MonoBehaviour
 
 
     public void onStartButtonClick(){
-        SceneManager.LoadScene("Play");
+        
+        transitionManager.GoToScene("Play");
 
     }
 

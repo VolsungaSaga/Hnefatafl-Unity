@@ -10,8 +10,6 @@ public class MenuManager : MonoBehaviour
 
     private GameObject currentOpenMenuObj;
 
-
-
     // Start is called before the first frame update
     void Start()
     {
