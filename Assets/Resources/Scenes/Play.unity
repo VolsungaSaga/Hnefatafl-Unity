@@ -991,6 +991,7 @@ MonoBehaviour:
   e_victory:
     m_PersistentCalls:
       m_Calls: []
+  sceneTransit: {fileID: 2146440584}
 --- !u!4 &1717842279
 Transform:
   m_ObjectHideFlags: 0

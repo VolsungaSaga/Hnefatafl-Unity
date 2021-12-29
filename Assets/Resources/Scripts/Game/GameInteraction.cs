@@ -112,12 +112,12 @@ public class GameInteraction : MonoBehaviour
     void SelectGamePiece(GameObject obj){
         selectedPiece = obj;
         selectedPiece.GetComponent<GamePiece>().isSelected = true;
-        selectedPiece.GetComponent<GamePiece>().ChangeColor(Color.blue);
+        selectedPiece.GetComponent<GamePiece>().SetColor(Color.blue);
     }
 
     void ClearSelection(){
         selectedPiece.GetComponent<GamePiece>().isSelected = false;
-        selectedPiece.GetComponent<GamePiece>().ChangeColor(Color.white);
+        selectedPiece.GetComponent<GamePiece>().SetColor(Color.white);
         selectedPiece = null;
     }
 

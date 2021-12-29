@@ -66,7 +66,7 @@ public class GamePiece : MonoBehaviour
 
 
     //Changes the piece's color.
-    public void ChangeColor(Color color){
+    public void SetColor(Color color){
         var material = gameObject.GetComponentInChildren<Renderer>().material;
         material.color = color;
     }

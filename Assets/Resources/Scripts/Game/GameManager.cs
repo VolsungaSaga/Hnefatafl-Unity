@@ -16,6 +16,8 @@ public class GameManager : MonoBehaviour
 
     public UnityEvent<int> e_victory;
 
+    public SceneTransit sceneTransit;
+
 
 
     void Awake(){
@@ -104,12 +106,12 @@ public class GameManager : MonoBehaviour
 
         if(Teams[winningTeam] == "White"){
 
-            SceneManager.LoadScene("WhiteVictory");
+            sceneTransit.GoToScene("WhiteVictory");
 
         }
 
         else if(Teams[winningTeam] == "Red"){
-            SceneManager.LoadScene("RedVictory");
+            sceneTransit.GoToScene("RedVictory");
         }
 
 

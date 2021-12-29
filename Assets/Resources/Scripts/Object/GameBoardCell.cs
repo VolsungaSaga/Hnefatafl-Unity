@@ -8,7 +8,6 @@ public class GameBoardCell : MonoBehaviour
     public int BoardX, BoardZ;
     public GameObject Occupant{get; set;}
 
-
     public void init(int boardX, int boardZ){
         BoardX = boardX;
         BoardZ = boardZ;
@@ -32,5 +31,10 @@ public class GameBoardCell : MonoBehaviour
 
     public GameObject GetGamePiece(){
         return Occupant;
+    }
+
+    public void SetColor(Color color){
+        var material = GetComponent<Renderer>().material;
+        material.color = color;
     }
 }

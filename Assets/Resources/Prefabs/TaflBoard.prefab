@@ -51,6 +51,15 @@ MonoBehaviour:
   whiteWarriorPrefab: {fileID: 4796388184792333787, guid: 070c7db66a478b44d8703854ad123593, type: 3}
   whiteKingPrefab: {fileID: 5939559042602459928, guid: 43893da4152f88141aa9a2ac0bea380d, type: 3}
   manager: {fileID: 0}
+  alternateColors:
+  - {r: 1, g: 1, b: 1, a: 0}
+  - {r: 0.24528301, g: 0.22561409, b: 0.22561409, a: 0}
+  e_boardMoveBegin:
+    m_PersistentCalls:
+      m_Calls: []
+  e_boardMoveFinished:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!156049354 &8862910065164312944
 Grid:
   m_ObjectHideFlags: 0

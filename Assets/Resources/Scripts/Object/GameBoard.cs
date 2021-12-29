@@ -19,6 +19,9 @@ public class GameBoard : MonoBehaviour
     public GameManager manager;
 
 
+    [Tooltip("If this list is populated, the board generation will alternate between the colors for each generated cell, leading to a checkerboard-like appearance.")]
+    public Color[] alternateColors;
+
     public enum Direction{
         PLUSZ, 
         MINUSZ, 
@@ -132,7 +135,8 @@ public class GameBoard : MonoBehaviour
 
 
     public void GenerateTaflBoard(int size){
-        
+        int colorIndex = 0;
+
         for(int z = 0; z < size; z++){
             for(int x = 0; x < size; x++){
 
@@ -149,6 +153,10 @@ public class GameBoard : MonoBehaviour
                 taflCell.transform.SetParent(gameObject.transform, true);
                 taflCell.GetComponent<GameBoardCell>().init(x, z);
                 Cells[x,z] = taflCell;
+
+                taflCell.GetComponent<GameBoardCell>().SetColor(alternateColors[colorIndex]);
+
+                colorIndex = (colorIndex + 1) % alternateColors.Length; 
             }
 
 
